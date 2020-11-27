@@ -15,7 +15,7 @@ bool is_valid(string formula){
 	string not_="'";
 	for( int i = 0; i < formula.size(); i++ ){
 		// FIX: indexing returns char, not std::string. Need to convert back to std::string if you really want to use compare.
-		if( ( ( std::string(1, formula[i]).compare(A)) < 0 ) || ( ( std::string(1, formula[i]).compare(Z) > 0 ) && ( std::string(1, formula[i]).compare(a) < 0 ) ) || ( std::string(1, formula[i]).compare(z) > 0 ) ) && ( std::string(1, formula[i]).compare(not_) !=0 ) && ( std::string(1, formula[i]).compare(plus) != 0 ) ){
+		if(( ( ( std::string(1, formula[i]).compare(A)) < 0 ) || ( ( std::string(1, formula[i]).compare(Z) > 0 ) && ( std::string(1, formula[i]).compare(a) < 0 ) ) || ( std::string(1, formula[i]).compare(z) > 0 ) ) && ( std::string(1, formula[i]).compare(not_) !=0 ) && ( std::string(1, formula[i]).compare(plus) != 0 ) ){
 			return false;
 		}
 	}
