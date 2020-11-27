@@ -2,30 +2,27 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
+#include <cstring>
 
 using namespace std;
 
 
 bool is_valid(string formula){
-	string A="A";
-	string a="a";
-	string Z="Z";
-	string z="z";
-	string plus="+";
-	string not_="'";
-	for( int i = 0; i < formula.size(); i++ ){
+	for( int i = 0; i < formula.length(); i++ ){
+		const char * character=&formula[i];
 		// FIX: indexing returns char, not std::string. Need to convert back to std::string if you really want to use compare.
-		if(( ( ( std::string(1, formula[i]).compare(A)) < 0 ) || ( ( std::string(1, formula[i]).compare(Z) > 0 ) && ( std::string(1, formula[i]).compare(a) < 0 ) ) || ( std::string(1, formula[i]).compare(z) > 0 ) ) && ( std::string(1, formula[i]).compare(not_) !=0 ) && ( std::string(1, formula[i]).compare(plus) != 0 ) ){
+		if(( (strncmp(character,"A",1) < 0 ) || ( ( strncmp(character,"Z",1) > 0 ) && ( strncmp(character,"a",1) < 0 ) ) || ( strncmp(character,"z",1) > 0 ) ) && ( strncmp(character,"'",1) !=0 ) && ( strncmp(character,"+",1) != 0 ) ){
 			return false;
 		}
 	}
 	return true;
 }
 
-string get_eight_alpha(string formula){
+vector<char> get_eight_alpha(string formula){
+	vector<char> characters={};
+	
 
-
-	return "";
+	return characters;
 }
 
 string convert_to_eight_alpha(string formula){
@@ -40,7 +37,7 @@ string to_SOP(string formula){
 
 
 
-	return 
+	return ;
 }
 
 
@@ -49,9 +46,9 @@ string to_SOP(string formula){
 
 int main(void){
 	string formula = "";
-	cout << "enter the formula" << endl;
+	cout << "Enter the formula: ";
 	cin >> formula;
-	if( !is_valid ){ cout << "error in the formula" << endl; return -1; }
+	if( !is_valid(formula) ){ cout << "Error in the formula" << endl; return -1; }
 
 	cout << formula << endl;
 	return 0;
