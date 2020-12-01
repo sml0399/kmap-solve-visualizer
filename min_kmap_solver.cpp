@@ -7,7 +7,7 @@
 using namespace std;
 
 
-bool is_valid(string formula){
+bool is_valid(string formula){ /*check whether input form is valid. Only alphabets, +, ' are allowed*/
 	for( int i = 0; i < formula.length(); i++ ){
 		const char * character=&formula[i];
 		// FIX: indexing returns char, not std::string. Need to convert back to std::string if you really want to use compare.
@@ -18,14 +18,14 @@ bool is_valid(string formula){
 	return true;
 }
 
-vector<char> get_eight_alpha(string formula){
+vector<char> get_eight_alpha(string formula){/*get alphabets in the input form. Allowed upto 8 alphabets.*/
 	vector<char> characters={};
 	
 
 	return characters;
 }
 
-string convert_to_eight_alpha(string formula){
+string convert_to_regular_alpha(string formula){ /*convert user inputs using fixed alphabets(a,b,c,d,e,f,g,h)*/
 
 
 
@@ -44,7 +44,7 @@ string to_SOP(string formula){
 */
 
 
-int main(void){
+int main(void){ /*temporary main. This part will be removed after other functionalities are implemented*/
 	string formula = "";
 	cout << "Enter the formula: ";
 	cin >> formula;
