@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
 
@@ -51,8 +52,20 @@ vector<char> get_eight_alpha(string formula){/*get alphabets in the input form. 
 }
 
 string convert_to_regular_alpha(string formula, vector<char> characters){ /*convert user inputs using fixed alphabets(a,b,c,d,e,f,g,h)*/
-	string result="abc";
+	string result="";
+	for( size_t i = 0; i < formula.length(); i++ ){
+		const char * character=&formula[i];		
+		bool not_added=true;
+		for(size_t j=0;j<characters.size();j++){
+			if((characters[j]-(*character))==0){
+				result.push_back('a'+j);
+				not_added=false;
+				break;
+			}
+		}
+		if(not_added){result.push_back(*character);}
 
+	}
 
 
 	return result;
@@ -88,17 +101,27 @@ int main(void){ /*temporary main. This part will be removed after other function
 	vector<char> characters={};
 	cout << "Enter the formula: ";
 	cin >> formula;
+	/*preprocess begin - remove space characters*/
+	string::iterator end_pos =remove(formula.begin(), formula.end(), ' ');
+	formula.erase(end_pos, formula.end());
+	/*preprocess end*/
 	if( !is_valid(formula) ){ cerr << "Error in the formula" << endl; return -1; }
 	characters=get_eight_alpha(formula);
 
+
+	cout<<"characters: ";
 	for(size_t i=0;i<characters.size();i++){cout<<characters[i]<<" ";}
 	cout<<endl;
 
-/*	if((characters.size()>8)||(characters.size()<1)){cerr<< "Error in the formula. We allow only eight different alphabet characters at maximum and requires at least one alphabet"<<endl;return -1;}
+
+	if((characters.size()>8)||(characters.size()<1)){cerr<< "Error in the formula. We allow eight different alphabet characters at maximum and requires at least one alphabet"<<endl;return -1;}
 	string regular_formula=convert_to_regular_alpha(formula, characters);
-	regular_formula=formula_expansion(regular_formula);
-	string solution=to_SOP(regular_formula);  
 	
+	cout<<"regular formula: "<<regular_formula<<endl;
+
+/*	regular_formula=formula_expansion(regular_formula);
+	string solution=to_SOP(regular_formula);  
+	solution=convert_to_original_alpha(solution, characters);
 	cout << solution << endl;*/
 	return 0;
 
