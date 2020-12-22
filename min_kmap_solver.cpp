@@ -12,11 +12,21 @@ bool is_valid(string formula){ /*check whether input form is valid. Only alphabe
 		const char * character=&formula[i];
 		// FIX: indexing returns char, not std::string. Need to convert back to std::string if you really want to use compare.
 		if(( (strncmp(character,"A",1) < 0 ) || ( ( strncmp(character,"Z",1) > 0 ) && ( strncmp(character,"a",1) < 0 ) ) || ( strncmp(character,"z",1) > 0 ) ) && ( strncmp(character,"'",1) !=0 ) && ( strncmp(character,"+",1) != 0 ) && ( strncmp(character,"(",1) !=0 ) && ( strncmp(character,")",1) !=0 )){
+			cerr<<"we only allow alphabets, +, ', paranthesis '(' and ')' "<<endl;
 			return false;
 		}
 	}
 	
-	/*TODO: paranthesis matching test*/
+	/*paranthesis matching test*/
+	int paranthesis_counter=0;
+	for( size_t i = 0; i < formula.length(); i++ ){
+		const char * character=&formula[i];
+		if( strncmp(character,"(",1) ==0 ){paranthesis_counter++;}
+		else if( strncmp(character,")",1) ==0 ){paranthesis_counter--;}
+		if(paranthesis_counter<0){cerr<<"paranthesis of your formula does not match"<<endl;return false;}
+	}
+	if(paranthesis_counter!=0){cerr<<"paranthesis of your formula does not match"<<endl;return false;}
+
 
 
 	return true;
