@@ -1,4 +1,4 @@
-CC := g++ -g -Wall -Werrors
+CC := g++ -g -Wall -Werror
 
 all: main kmap.o
 
