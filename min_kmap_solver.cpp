@@ -8,11 +8,19 @@
 using namespace std;
 
 
-bool is_valid(string formula){ /*check whether input form is valid. Only alphabets, +, ', paranthesis are allowed*/
+bool is_valid(string formula){ 
+	/* input: string typed formula, output: boolean. Return True when formula has no problem				*/
+	/* check whether input form is valid. Only alphabets, +, ', paranthesis are allowed					*/
+	/* tests whether formula contains only valid characters									*/
+	/* checks paranthesis matching												*/
+	
+
 	for( size_t i = 0; i < formula.length(); i++ ){
 		const char * character=&formula[i];
-		// FIX: indexing returns char, not std::string. Need to convert back to std::string if you really want to use compare.
-		if(( (strncmp(character,"A",1) < 0 ) || ( ( strncmp(character,"Z",1) > 0 ) && ( strncmp(character,"a",1) < 0 ) ) || ( strncmp(character,"z",1) > 0 ) ) && ( strncmp(character,"'",1) !=0 ) && ( strncmp(character,"+",1) != 0 ) && ( strncmp(character,"(",1) !=0 ) && ( strncmp(character,")",1) !=0 )){
+		if(( (strncmp(character,"A",1) < 0 ) || 
+			( ( strncmp(character,"Z",1) > 0 ) && ( strncmp(character,"a",1) < 0 ) ) || 
+			( strncmp(character,"z",1) > 0 ) ) && 
+			( strncmp(character,"'",1) !=0 ) && ( strncmp(character,"+",1) != 0 ) && ( strncmp(character,"(",1) !=0 ) && ( strncmp(character,")",1) !=0 )){
 			cerr<<"we only allow alphabets, +, ', paranthesis '(' and ')' "<<endl;
 			return false;
 		}
@@ -33,7 +41,9 @@ bool is_valid(string formula){ /*check whether input form is valid. Only alphabe
 	return true;
 }
 
-vector<char> get_eight_alpha(string formula){/*get alphabets in the input form. Allowed upto 8 alphabets.*/
+vector<char> get_eight_alpha(string formula){
+	/* input: string typed formula, output: vector carrying chars.(eight alphabets used in the formula of user input)	*/
+	/* get alphabets in the input form. Allowed upto 8 alphabets.								*/
 	vector<char> characters={};
 	for( size_t i = 0; i < formula.length(); i++ ){
 		const char * character=&formula[i];		
@@ -51,7 +61,9 @@ vector<char> get_eight_alpha(string formula){/*get alphabets in the input form. 
 	return characters;
 }
 
-string convert_to_regular_alpha(string formula, vector<char> characters){ /*convert user inputs using fixed alphabets(a,b,c,d,e,f,g,h)*/
+string convert_to_regular_alpha(string formula, vector<char> characters){ 
+	/* input: vector carrying chars, string typed formula. output: string typed formula					*/
+	/* convert user inputs to formula with fixed alphabets(a,b,c,d,e,f,g,h)							*/
 	string result="";
 	for( size_t i = 0; i < formula.length(); i++ ){
 		const char * character=&formula[i];		
@@ -71,7 +83,9 @@ string convert_to_regular_alpha(string formula, vector<char> characters){ /*conv
 	return result;
 }
 
-string convert_to_original_alpha(string formula, vector<char> characters){ /*convert result to user defined alphabets*/
+string convert_to_original_alpha(string formula, vector<char> characters){ 
+	/* input: string typed formula, vector carrying chars(eight alphabet info).						*/
+	/* convert result to user defined alphabets										*/
 	string result="";
 	for( size_t i = 0; i < formula.length(); i++ ){
 		const char * character=&formula[i];		
@@ -105,7 +119,13 @@ string to_SOP(string formula){
 	return result;
 }
 
-
+string preprocess(string formula){
+	/* input: string typed formula, output: string typed preprocessed formula						*/
+	/* preprocess: remove space character from user input									*/
+	string::iterator end_pos =remove(formula.begin(), formula.end(), ' ');
+	formula.erase(end_pos, formula.end());
+	return formula;
+}
 
 
 
@@ -114,22 +134,15 @@ int main(void){ /*temporary main. This part will be removed after other function
 	vector<char> characters={};
 	cout << "Enter the formula: ";
 	getline(cin,formula);
-	/*preprocess begin - remove space characters*/
-	string::iterator end_pos =remove(formula.begin(), formula.end(), ' ');
-	formula.erase(end_pos, formula.end());
-	/*preprocess end*/
+	formula=preprocess(formula);
 	if( !is_valid(formula) ){ cerr << "Error in the formula" << endl; return -1; }
 	characters=get_eight_alpha(formula);
-//	cout<<"characters: ";
-//	for(size_t i=0;i<characters.size();i++){cout<<characters[i]<<" ";}
-//	cout<<endl;
 	if((characters.size()>8)||(characters.size()<1)){cerr<< "Error in the formula. We allow eight different alphabet characters at maximum and requires at least one alphabet"<<endl;return -1;}
 	string regular_formula=convert_to_regular_alpha(formula, characters);
-//	cout<<"regular formula: "<<regular_formula<<endl;
-//	cout<<"convert to original alphabets: "<<convert_to_original_alpha(regular_formula,characters)<<endl;
 
 /*	regular_formula=formula_expansion(regular_formula);
 	string solution=to_SOP(regular_formula);  
+
 	solution=convert_to_original_alpha(solution, characters);
 	cout << solution << endl;*/
 	return 0;
