@@ -13,8 +13,6 @@ bool is_valid(string formula){
 	/* check whether input form is valid. Only alphabets, +, ', paranthesis are allowed					*/
 	/* tests whether formula contains only valid characters									*/
 	/* checks paranthesis matching												*/
-	
-
 	for( size_t i = 0; i < formula.length(); i++ ){
 		const char * character=&formula[i];
 		if(( (strncmp(character,"A",1) < 0 ) || 
@@ -106,17 +104,18 @@ string convert_to_original_alpha(string formula, vector<char> characters){
 }
 
 string formula_expansion(string formula){
-	string result="abc";
+	/*input: string typed formula, output: string typed formula that expanded the input formula*/
+	/*TODO: implement formula_expansion*/
 
-
-	return result;
+	return formula;
 }
 
 string to_SOP(string formula){
-	string result="abc";
+	/*input: string typed formula, output: string typed formula that satisfies minimum SOP*/
+	/*TODO: implement to_SOP function*/
 
 
-	return result;
+	return formula;
 }
 
 string preprocess(string formula){
