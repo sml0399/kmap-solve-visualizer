@@ -2,23 +2,22 @@
 
 using namespace std;
 
-bool is_valid(string formula){
+bool is_valid(string formula) {
 	/* input: string typed formula, output: boolean. Return True when formula has no problem				*/
 	/* check whether input form is valid. Only alphabets, +, ', paranthesis are allowed					*/
 	/* tests whether formula contains only valid characters									*/
 	/* checks paranthesis matching												*/
-	for (size_t i = 0; i < formula.length(); ++i){
-		if ((formula[i] - 'A' >= 0) && (formula[i] - 'Z' <= 0))
+	for (size_t i = 0; i < formula.length(); i++) {
+		if ((formula[i] >= 'A') && (formula[i] <= 'Z'))
 			// Large Alpha
 			continue;
-		else if ((formula[i] - 'a' >= 0) && (formula[i] - 'z' <= 0))
+		else if ((formula[i] >= 'a') && (formula[i] <= 'z'))
 			// Small Alpha
 			continue;
 		else if ((formula[i] == '+') || (formula[i] == '\'') || (formula[i] == '(') || (formula[i] == ')'))
 			// Special chars
 			continue;
-		else
-		{
+		else {
 			cerr << "only alphabets, +, ', paranthesis '(' and ')' are allowed" << endl;
 			return false;
 		}
@@ -26,20 +25,18 @@ bool is_valid(string formula){
 
 	/*parenthesis matching test*/
 	int parenthesis_counter=0;
-	for (size_t i = 0; i < formula.length(); ++i){
+	for (size_t i = 0; i < formula.length(); ++i) {
 		if (formula[i] == '(')
 			parenthesis_counter++;
 		else if (formula[i] == ')')
 			parenthesis_counter--;
 
-		if (parenthesis_counter < 0)
-		{
+		if (parenthesis_counter < 0) {
 			cerr << "parenthesis of your formula does not match" << endl;
 			return false;
 		}
 	}
-	if (parenthesis_counter != 0)
-	{
+	if (parenthesis_counter != 0) {
 		cerr << "parenthesis of your formula does not match" << endl;
 		return false;
 	}
