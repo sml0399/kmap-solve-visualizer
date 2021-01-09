@@ -7,13 +7,19 @@ bool is_valid(string formula){
 	/* check whether input form is valid. Only alphabets, +, ', paranthesis are allowed					*/
 	/* tests whether formula contains only valid characters									*/
 	/* checks paranthesis matching												*/
-	for( size_t i = 0; i < formula.length(); i++ ){
-		const char * character=&formula[i];
-		if(( (strncmp(character,"A",1) < 0 ) ||
-			( ( strncmp(character,"Z",1) > 0 ) && ( strncmp(character,"a",1) < 0 ) ) ||
-			( strncmp(character,"z",1) > 0 ) ) &&
-			( strncmp(character,"'",1) !=0 ) && ( strncmp(character,"+",1) != 0 ) && ( strncmp(character,"(",1) !=0 ) && ( strncmp(character,")",1) !=0 )){
-			cerr<<"we only allow alphabets, +, ', paranthesis '(' and ')' "<<endl;
+	for (size_t i = 0; i < formula.length(); ++i){
+		if ((formula[i] - 'A' >= 0) && (formula[i] - 'Z' <= 0))
+			// Large Alpha
+			continue;
+		else if ((formula[i] - 'a' >= 0) && (formula[i] - 'z' <= 0))
+			// Small Alpha
+			continue;
+		else if ((formula[i] == '+') || (formula[i] == '\'') || (formula[i] == '(') || (formula[i] == ')'))
+			// Special chars
+			continue;
+		else
+		{
+			cerr << "only alphabets, +, ', paranthesis '(' and ')' are allowed" << endl;
 			return false;
 		}
 	}
