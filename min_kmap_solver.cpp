@@ -75,7 +75,7 @@ string convert_to_regular_alpha(string formula, vector<char> characters){
 	/* input: vector carrying chars, string typed formula. output: string typed formula					*/
 	/* convert user inputs to formula with fixed alphabets(a,b,c,d,e,f,g,h)							*/
 	for (size_t i = 0; i < characters.size(); i++)
-		replace(formula.begin(), formula.end(), characters[i], (char)(i+'0'));
+		replace(formula.begin(), formula.end(), characters[i], (char)(i + '0'));
 	for (size_t i = 0; i < 8; i++)
 		replace(formula.begin(), formula.end(), (char)(i + '0'), (char)(i + 'a'));
 	return formula;

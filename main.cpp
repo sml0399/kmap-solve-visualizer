@@ -29,7 +29,6 @@ int main(void) {
 		cout << c << endl;
 
 	string regular_formula = convert_to_regular_alpha(formula, char_set);
-
 	cout << regular_formula << endl;
 
 /*	regular_formula=formula_expansion(regular_formula);
