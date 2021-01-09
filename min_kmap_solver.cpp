@@ -44,21 +44,21 @@ bool is_valid(string formula) {
 	return true;
 }
 
-vector<char> get_eight_alpha(string formula){
+vector<char> get_eight_alpha(string formula) {
 	/* input: string typed formula, output: vector carrying chars.(eight alphabets used in the formula of user input)	*/
 	/* get alphabets in the input form. Allowed upto 8 alphabets.								*/
-	vector<char> characters={};
-	for( size_t i = 0; i < formula.length(); i++ ){
-		const char * character=&formula[i];
-		if( ( ( strncmp(character,"A",1) >= 0 ) && ( strncmp(character,"Z",1) <= 0 ) ) || ( ( strncmp(character,"a",1) >= 0 ) && ( strncmp(character,"z",1) <= 0 ) ) ){
-			bool new_alphabet=true;
-			for(size_t j=0;j<characters.size();j++){
-				if((characters[j] - *character)==0){
-					new_alphabet=false;
+	vector<char> characters = {};
+	for (size_t i = 0; i < formula.length(); i++) {
+		if (isalpha(formula[i])) {
+			bool new_alphabet = true;
+			for (char c : characters) {
+				if (formula[i] == c){
+					new_alphabet = false;
 					break;
 				}
 			}
-			if(new_alphabet){characters.push_back(*character);}
+			if (new_alphabet)
+				characters.push_back(formula[i]);
 		}
 	}
 	return characters;
