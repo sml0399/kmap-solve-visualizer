@@ -74,23 +74,11 @@ vector<char> get_eight_alpha(string formula) {
 string convert_to_regular_alpha(string formula, vector<char> characters){
 	/* input: vector carrying chars, string typed formula. output: string typed formula					*/
 	/* convert user inputs to formula with fixed alphabets(a,b,c,d,e,f,g,h)							*/
-	string result="";
-	for( size_t i = 0; i < formula.length(); i++ ){
-		const char * character=&formula[i];
-		bool not_added=true;
-		for(size_t j=0;j<characters.size();j++){
-			if((characters[j]-(*character))==0){
-				result.push_back('a'+j);
-				not_added=false;
-				break;
-			}
-		}
-		if(not_added){result.push_back(*character);}
-
-	}
-
-
-	return result;
+	for (size_t i = 0; i < characters.size(); i++)
+		replace(formula.begin(), formula.end(), characters[i], (char)(i+'0'));
+	for (size_t i = 0; i < 8; i++)
+		replace(formula.begin(), formula.end(), (char)(i + '0'), (char)(i + 'a'));
+	return formula;
 }
 
 string convert_to_original_alpha(string formula, vector<char> characters){
