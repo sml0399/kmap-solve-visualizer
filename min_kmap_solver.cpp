@@ -47,21 +47,28 @@ bool is_valid(string formula) {
 vector<char> get_eight_alpha(string formula) {
 	/* input: string typed formula, output: vector carrying chars.(eight alphabets used in the formula of user input)	*/
 	/* get alphabets in the input form. Allowed upto 8 alphabets.								*/
-	vector<char> characters = {};
+	vector<char> char_set = {};
 	for (size_t i = 0; i < formula.length(); i++) {
 		if (isalpha(formula[i])) {
 			bool new_alphabet = true;
-			for (char c : characters) {
+			for (char c : char_set) {
 				if (formula[i] == c){
 					new_alphabet = false;
 					break;
 				}
 			}
 			if (new_alphabet)
-				characters.push_back(formula[i]);
+				char_set.push_back(formula[i]);
 		}
 	}
-	return characters;
+
+	if ((char_set.size() > 8) || (char_set.size() < 1))
+	{
+		cerr << "Error in the formula. We allow eight different alphabet characters at maximum and requires at least one alphabet" << endl;
+		throw "Character Set Number Error";
+	}
+
+	return char_set;
 }
 
 string convert_to_regular_alpha(string formula, vector<char> characters){
@@ -126,7 +133,7 @@ string to_SOP(string formula){
 string preprocess(string formula){
 	/* input: string typed formula, output: string typed preprocessed formula						*/
 	/* preprocess: remove space character from user input									*/
-	string::iterator end_pos =remove(formula.begin(), formula.end(), ' ');
+	string::iterator end_pos = remove(formula.begin(), formula.end(), ' ');
 	formula.erase(end_pos, formula.end());
 	return formula;
 }
