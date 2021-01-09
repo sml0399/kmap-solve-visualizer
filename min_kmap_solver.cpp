@@ -18,17 +18,25 @@ bool is_valid(string formula){
 		}
 	}
 
-	/*paranthesis matching test*/
-	int paranthesis_counter=0;
-	for( size_t i = 0; i < formula.length(); i++ ){
-		const char * character=&formula[i];
-		if( strncmp(character,"(",1) ==0 ){paranthesis_counter++;}
-		else if( strncmp(character,")",1) ==0 ){paranthesis_counter--;}
-		if(paranthesis_counter<0){cerr<<"paranthesis of your formula does not match"<<endl;return false;}
+	/*parenthesis matching test*/
+	int parenthesis_counter=0;
+	for (size_t i = 0; i < formula.length(); ++i){
+		if (formula[i] == '(')
+			parenthesis_counter++;
+		else if (formula[i] == ')')
+			parenthesis_counter--;
+
+		if (parenthesis_counter < 0)
+		{
+			cerr << "parenthesis of your formula does not match" << endl;
+			return false;
+		}
 	}
-	if(paranthesis_counter!=0){cerr<<"paranthesis of your formula does not match"<<endl;return false;}
-
-
+	if (parenthesis_counter != 0)
+	{
+		cerr << "parenthesis of your formula does not match" << endl;
+		return false;
+	}
 
 	return true;
 }
